@@ -1,19 +1,10 @@
-![SofleKeyboard default keymap](https://github.com/josefadamcik/SofleKeyboard/raw/master/Images/soflekeyboard.png)
-![SofleKeyboard adjust layer](https://github.com/josefadamcik/SofleKeyboard/raw/master/Images/soflekeyboard_layout_adjust.png)
+# Sofle keymap from marcoster
 
+This keymap allows has taken some symbol definitions from the klor keyboard and some personal preferences (layer keys on left side, space and enter on the right side).
+Also it uses homerow mods and has a separate qwerty layer without those.
 
-# Default keymap for Sofle Keyboard
-
-Layout in [Keyboard Layout Editor](http://www.keyboard-layout-editor.com/#/gists/76efb423a46cbbea75465cb468eef7ff) and [adjust layer](http://www.keyboard-layout-editor.com/#/gists/4bcf66f922cfd54da20ba04905d56bd4)
-
-
-Features:
-
-- Symmetric modifiers (CMD/Super, Alt/Opt, Ctrl, Shift)
-- Various modes, can be switched (using Adjust layer and the selected one is stored in EEPROM.
-- Modes for Qwerty and Colemak support
-- Modes for Mac vs Linux/Win support -> different order of modifiers and different action shortcuts on the "UPPER" layer (the red one in the image). Designed to simplify transtions when switching between operating systems often.
-- The OLED on master half shows selected mode and caps lock state and is rotated.
-- Left encoder controls volume up/down/mute. Right encoder PGUP/PGDOWN.
-
-
+## compile for adafruit kb2040 as controler
+The following command compiles this for a kb2040 with qmk's **CONVERT_TO** feature (**ALLOW_WARNINGS** is somehow needed for me; never mentioned in documentation).
+```
+ALLOW_WARNINGS=yes qmk compile -kb sofle -km marcoster -e CONVERT_TO=kb2040
+```
