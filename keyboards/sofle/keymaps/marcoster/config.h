@@ -5,6 +5,9 @@
 #define IGNORE_MOD_TAP_INTERRUPT
 #define RETRO_TAPPING
 
+#ifdef TAPPING_TERM
+#    undef TAPPING_TERM
+#endif
 #define TAPPING_TERM 200
 //
 #define WAIT_FOR_USB 1
