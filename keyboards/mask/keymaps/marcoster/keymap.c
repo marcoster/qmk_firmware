@@ -23,20 +23,21 @@ enum taipo_mod {
     TAIPO_MOD_LOWER,
     TAIPO_MOD_RAISE,
 };
-static enum taipo_mod m_taipo_mod = TAIPO_MOD_NONE;
 
 enum mask_layers {
     /* _M_XYZ = Mac Os, _W_XYZ = Win/Linux */
     _QWERTY,
     _QWERTY_HOMEROW,
     _TAIPO,
+    _TAIPO_LOWER,
+    _TAIPO_RAISE,
     _GAME,
     _LOWER,
     _RAISE,
     _ADJUST,
 };
 
-enum custom_keycodes { KC_QWERTY = SAFE_RANGE, KC_QWERTY_HOMEROW, KC_TAIPO, KC_GAME, KC_LOWER, KC_RAISE, KC_ADJUST, KC_GHOME, KC_GEND, KC_PRVWD, KC_NXTWD, KC_LSTRT, KC_LEND, KC_DLINE, KC_TAIPO_LOWER, KC_TAIPO_RAISE};
+enum custom_keycodes { KC_QWERTY = SAFE_RANGE, KC_QWERTY_HOMEROW, KC_TAIPO, KC_GAME, KC_LOWER, KC_RAISE, KC_ADJUST, KC_GHOME, KC_GEND, KC_PRVWD, KC_NXTWD, KC_LSTRT, KC_LEND, KC_DLINE};
 
 // MOD TAP helper
 #define MT_A LCTL_T(KC_A)
@@ -47,6 +48,9 @@ enum custom_keycodes { KC_QWERTY = SAFE_RANGE, KC_QWERTY_HOMEROW, KC_TAIPO, KC_G
 #define MT_K RGUI_T(KC_K)
 #define MT_L RALT_T(KC_L)
 #define MT_SCLN RCTL_T(KC_SCLN)
+
+#define MT_TAIPO_LOWER LT(_TAIPO_LOWER, KC_BSPC)
+#define MT_TAIPO_RAISE LT(_TAIPO_RAISE, KC_SPC)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -99,10 +103,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_TAIPO] = LAYOUT(
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                         KC_GHOME,       KC_GEND, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                         KC_QWERTY,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX,  KC_R,   KC_S,     KC_N,    KC_I,   XXXXXXX,                                         XXXXXXX,        KC_I,    KC_N,    KC_S,    KC_R,    XXXXXXX,
-  XXXXXXX,  KC_A,   KC_O,     KC_T,    KC_E,   XXXXXXX,        KC_MUTE,        QK_COMBO_TOGGLE, XXXXXXX,        KC_E,    KC_T,    KC_O,    KC_A,    XXXXXXX,
-                    XXXXXXX, XXXXXXX, XXXXXXX, KC_TAIPO_LOWER, KC_TAIPO_RAISE, KC_TAIPO_RAISE,  KC_TAIPO_LOWER, XXXXXXX, XXXXXXX, XXXXXXX
+  XXXXXXX, KC_R,    KC_S,     KC_N,    KC_I,   XXXXXXX,                                         XXXXXXX,        KC_I,    KC_N,    KC_S,    KC_R,    XXXXXXX,
+  XXXXXXX, KC_A,    KC_O,     KC_T,    KC_E,   XXXXXXX,        KC_MUTE,        QK_COMBO_TOGGLE, XXXXXXX,        KC_E,    KC_T,    KC_O,    KC_A,    XXXXXXX,
+                    XXXXXXX, XXXXXXX, XXXXXXX, MT_TAIPO_LOWER, MT_TAIPO_RAISE, MT_TAIPO_RAISE,  MT_TAIPO_LOWER, XXXXXXX, XXXXXXX, XXXXXXX
 ),
+[_TAIPO_LOWER] = LAYOUT(
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                        KC_GHOME,  KC_GEND,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                        KC_QWERTY, XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+  XXXXXXX, LSFT(KC_R), LSFT(KC_S), LSFT(KC_N), LSFT(KC_I), XXXXXXX,                            XXXXXXX,   LSFT(KC_I), LSFT(KC_N), LSFT(KC_S), LSFT(KC_R), XXXXXXX,
+  XXXXXXX, LSFT(KC_A), LSFT(KC_O), LSFT(KC_T), LSFT(KC_E), XXXXXXX, KC_MUTE,  QK_COMBO_TOGGLE, XXXXXXX,   LSFT(KC_E), LSFT(KC_T), LSFT(KC_O), LSFT(KC_A), XXXXXXX,
+                             XXXXXXX, XXXXXXX, XXXXXXX,    KC_TRNS, KC_TRNS,  KC_TRNS,         KC_TRNS,   XXXXXXX,    XXXXXXX,    XXXXXXX
+),
+[_TAIPO_RAISE] = LAYOUT(
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                  KC_GHOME,  KC_GEND, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                  KC_QWERTY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX, KC_RABK, KC_RCBR, KC_RBRC, KC_RPRN, XXXXXXX,                                  XXXXXXX,   KC_RPRN, KC_RBRC, KC_RCBR, KC_RABK, XXXXXXX,
+  XXXXXXX, KC_LABK, KC_LCBR, KC_LBRC, KC_LPRN, XXXXXXX, KC_MUTE,        QK_COMBO_TOGGLE, XXXXXXX,   KC_LPRN, KC_LBRC, KC_LCBR, KC_LABK, XXXXXXX,
+                    XXXXXXX, XXXXXXX, XXXXXXX, KC_TRNS, KC_TRNS,        KC_TRNS,         KC_TRNS,   XXXXXXX, XXXXXXX, XXXXXXX
+),
+
+
+
 /*
  * GAME
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -272,9 +293,9 @@ bool oled_task_user(void) {
 }
 
 #endif
-
+/*
 #define TP_SINGLE_HANDLE_CHAR(key, kc_raise)    case key: {                                 \
-                                                    switch(m_taipo_mod) {                   \
+                                                    switch(get_highest_layer(layer_state)) {                   \
                                                         case TAIPO_MOD_LOWER:               \
                                                             if (record->event.pressed) {    \
                                                                 tap_code16(LSFT(key));      \
@@ -291,19 +312,19 @@ bool oled_task_user(void) {
                                                     return true;                            \
                                                 }
 
-
+*/
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        TP_SINGLE_HANDLE_CHAR(KC_R, KC_RABK)
-        TP_SINGLE_HANDLE_CHAR(KC_S, KC_RCBR)
-        TP_SINGLE_HANDLE_CHAR(KC_N, KC_RBRC)
-        TP_SINGLE_HANDLE_CHAR(KC_I, KC_RPRN)
+        //TP_SINGLE_HANDLE_CHAR(KC_R, KC_RABK)
+        //TP_SINGLE_HANDLE_CHAR(KC_S, KC_RCBR)
+        //TP_SINGLE_HANDLE_CHAR(KC_N, KC_RBRC)
+        //TP_SINGLE_HANDLE_CHAR(KC_I, KC_RPRN)
 
-        TP_SINGLE_HANDLE_CHAR(KC_A, KC_LABK)
-        TP_SINGLE_HANDLE_CHAR(KC_O, KC_LCBR)
-        TP_SINGLE_HANDLE_CHAR(KC_T, KC_LBRC)
-        TP_SINGLE_HANDLE_CHAR(KC_E, KC_LPRN)
+        //TP_SINGLE_HANDLE_CHAR(KC_A, KC_LABK)
+        //TP_SINGLE_HANDLE_CHAR(KC_O, KC_LCBR)
+        //TP_SINGLE_HANDLE_CHAR(KC_T, KC_LBRC)
+        //TP_SINGLE_HANDLE_CHAR(KC_E, KC_LPRN)
 
         case KC_QWERTY:
             if (record->event.pressed) {
@@ -319,21 +340,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_TAIPO:
             if (record->event.pressed) {
                 set_single_persistent_default_layer(_TAIPO);
-                m_taipo_mod = TAIPO_MOD_NONE;
-            }
-            return false;
-        case KC_TAIPO_LOWER:
-            if (record->event.pressed) {
-                m_taipo_mod = TAIPO_MOD_LOWER;
-            } else {
-                m_taipo_mod = TAIPO_MOD_NONE;
-            }
-            return false;
-        case KC_TAIPO_RAISE:
-            if (record->event.pressed) {
-                m_taipo_mod = TAIPO_MOD_RAISE;
-            } else {
-                m_taipo_mod = TAIPO_MOD_NONE;
             }
             return false;
         case KC_GAME:
@@ -524,11 +530,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #define TP_COMBO_ACTION(name) [name] = COMBO_ACTION(name##_combo)
 #define TP_COMBO_MOD_HANDLE(name, kc_none, kc_lower, kc_raise)      case name: {                            \
                                                                         if (pressed) {                      \
-                                                                            switch(m_taipo_mod) {           \
-                                                                                case TAIPO_MOD_LOWER:       \
+                                                                            switch(get_highest_layer(layer_state)) {     \
+                                                                                case _TAIPO_LOWER:       \
                                                                                     tap_code16(kc_lower);   \
                                                                                     break;                  \
-                                                                                case TAIPO_MOD_RAISE:       \
+                                                                                case _TAIPO_RAISE:       \
                                                                                     tap_code16(kc_raise);   \
                                                                                     break;                  \
                                                                                 case TAIPO_MOD_NONE:        \
@@ -543,11 +549,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #define TP_COMBO_MOD_HANDLE_CHAR(name, kc_none, kc_raise) TP_COMBO_MOD_HANDLE(name, kc_none, LSFT(kc_none), kc_raise)
 #define TP_COMBO_MOD_HANDLE_OSM(name, kc_none, kc_lower, kc_raise)  case name: {                            \
                                                                         if (pressed) {                      \
-                                                                            switch(m_taipo_mod) {           \
-                                                                                case TAIPO_MOD_LOWER:       \
+                                                                            switch(get_highest_layer(layer_state)) {           \
+                                                                                case _TAIPO_LOWER:       \
                                                                                     tap_code16(kc_lower);   \
                                                                                     break;                  \
-                                                                                case TAIPO_MOD_RAISE:       \
+                                                                                case _TAIPO_RAISE:       \
                                                                                     tap_code16(kc_raise);   \
                                                                                     break;                  \
                                                                                 case TAIPO_MOD_NONE:        \

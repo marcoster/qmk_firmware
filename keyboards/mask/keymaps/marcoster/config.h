@@ -28,6 +28,8 @@
 // #define MASTER_LEFT
 
 //---- TAIPO ----//
+#define ONESHOT_TIMEOUT 10000
+#define COMBO_ONLY_FROM_LAYER  2
 
 //---- RGB AND ANIMATION STUFF ----//
 #define RGB_DI_PIN D3
