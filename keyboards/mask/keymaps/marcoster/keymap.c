@@ -23,14 +23,14 @@ enum mask_layers {
     _QWERTY,
     _QWERTY_HOMEROW,
     _COLEMAK,
-    _QWERTY_GUI,
+    //_QWERTY_GUI,
     _GAME,
     _LOWER,
     _RAISE,
     _ADJUST,
 };
 
-enum custom_keycodes { KC_QWERTY = SAFE_RANGE, KC_QWERTY_HOMEROW, KC_QWERTY_GUI, KC_COLEMAK, KC_GAME, KC_LOWER, KC_RAISE, KC_ADJUST, KC_GHOME, KC_GEND, KC_PRVWD, KC_NXTWD, KC_LSTRT, KC_LEND, KC_DLINE };
+enum custom_keycodes { KC_QWERTY = SAFE_RANGE, KC_QWERTY_HOMEROW, KC_COLEMAK, KC_GAME, KC_LOWER, KC_RAISE, KC_ADJUST, KC_GHOME, KC_GEND, KC_PRVWD, KC_NXTWD, KC_LSTRT, KC_LEND, KC_DLINE };
 
 // MOD TAP helper
 #define MT_A LCTL_T(KC_A)
@@ -96,15 +96,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,   KC_Q,   KC_W,     KC_F,    KC_P,          KC_B,                           KC_J,   KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_DEL,
   KC_LSFT,  KC_A,   KC_R,     KC_S,    KC_T,          KC_G,                           KC_M,   KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
   KC_LCTL,  KC_Z,   KC_X,     KC_C,    KC_D,          KC_V,     KC_MUTE,     XXXXXXX, KC_K,   KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                    KC_LCTL,  KC_LALT, KC_QWERTY_GUI, KC_LOWER, KC_RAISE,    KC_ENT,  KC_SPC, KC_RGUI, KC_RALT, KC_RCTL
+                    KC_LCTL,  KC_LALT, KC_LGUI,       KC_LOWER, KC_RAISE,    KC_ENT,  KC_SPC, KC_RGUI, KC_RALT, KC_RCTL
 ),
-[_QWERTY_GUI] = LAYOUT(
-  LGUI(KC_ESC),  LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5),                                  LGUI(KC_6),   LGUI(KC_7), LGUI(KC_8),    LGUI(KC_9),   LGUI(KC_0),    LGUI(KC_BSPC),
-  LGUI(KC_TAB),  LGUI(KC_Q), LGUI(KC_W), LGUI(KC_E), LGUI(KC_R), LGUI(KC_T),                                  LGUI(KC_Y),   LGUI(KC_U), LGUI(KC_I),    LGUI(KC_O),   LGUI(KC_P),    LGUI(KC_DEL),
-  LGUI(KC_LSFT), LGUI(KC_A), LGUI(KC_S), LGUI(KC_D), LGUI(KC_F), LGUI(KC_G),                                  LGUI(KC_H),   LGUI(KC_J), LGUI(KC_K),    LGUI(KC_L),   LGUI(KC_SCLN), LGUI(KC_QUOT),
-  LGUI(KC_LCTL), LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), LGUI(KC_B), LGUI(KC_MUTE),     XXXXXXX,      LGUI(KC_N),   LGUI(KC_M), LGUI(KC_COMM), LGUI(KC_DOT), LGUI(KC_SLSH), LGUI(KC_RSFT),
-                             _______,    _______,    _______,    _______,    _______,           LGUI(KC_ENT), LGUI(KC_SPC), _______,    _______,       _______
-),
+//[_QWERTY_GUI] = LAYOUT(
+//  LGUI(KC_ESC),  LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5),                                  LGUI(KC_6),   LGUI(KC_7), LGUI(KC_8),    LGUI(KC_9),   LGUI(KC_0),    LGUI(KC_BSPC),
+//  LGUI(KC_TAB),  LGUI(KC_Q), LGUI(KC_W), LGUI(KC_E), LGUI(KC_R), LGUI(KC_T),                                  LGUI(KC_Y),   LGUI(KC_U), LGUI(KC_I),    LGUI(KC_O),   LGUI(KC_P),    LGUI(KC_DEL),
+//  LGUI(KC_LSFT), LGUI(KC_A), LGUI(KC_S), LGUI(KC_D), LGUI(KC_F), LGUI(KC_G),                                  LGUI(KC_H),   LGUI(KC_J), LGUI(KC_K),    LGUI(KC_L),   LGUI(KC_SCLN), LGUI(KC_QUOT),
+//  LGUI(KC_LCTL), LGUI(KC_Z), LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), LGUI(KC_B), LGUI(KC_MUTE),     XXXXXXX,      LGUI(KC_N),   LGUI(KC_M), LGUI(KC_COMM), LGUI(KC_DOT), LGUI(KC_SLSH), LGUI(KC_RSFT),
+//                             _______,    _______,    _______,    _______,    _______,           LGUI(KC_ENT), LGUI(KC_SPC), _______,    _______,       _______
+//),
 /*
  * GAME
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -287,7 +287,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 set_single_persistent_default_layer(_QWERTY_HOMEROW);
             }
             return false;
-
+            /*
         case KC_QWERTY_GUI:
             if (record->event.pressed) {
                 layer_on(_QWERTY_GUI);
@@ -297,6 +297,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 // update_tri_layer(_LOWER, _RAISE, _ADJUST);
             }
             return false;
+            */
 
         case KC_COLEMAK:
             if (record->event.pressed) {
