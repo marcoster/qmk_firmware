@@ -34,3 +34,6 @@
 
 /* communication between sides */
 #define SOFT_SERIAL_PIN D2
+
+#define AZOTEQ_IQS5XX_TPS43
+#define AZOTEQ_IQS5XX_ROTATION_90
