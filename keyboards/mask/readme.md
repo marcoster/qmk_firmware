@@ -1,44 +1,27 @@
-# mask keyboard
+# Sofle Keyboard
 
-[Github KiCad Projects](https://github.com/marcoster/mask)
+![SofleKeyboard version 1](https://i.imgur.com/S5GTKth.jpeg)
 
-*mask* keyboards are some (working) experiments built after starting digging into the world of split keyboards.
-Each version has a totally different goal/approach.
-The basic layout is heavily inspired by the sofle-keyboard (but the encoder was removed, since I did never get used to it).
+Sofle is 6×4+5 keys column-staggered split keyboard. Based on Lily58, Corne and Helix keyboards.
 
-## mask-0.0.0
-Version 0 (not supported in qmk) had 2 goals:
-  1) add another column on the outside
-    - I thought that would be great, but it's actually better to use more layer ;-)
-  2) tinker around with the Nordic nRF5340 based BLE module ublox NORA-B106
-    - which worked with some quirks under zmk, but was not that easy at that time (the chip was quite new)
-  3) I totally missed adding battery-charger and connectors for a battery for a fully-wireless build...
+More details about the keyboard on my blog: [Let me introduce you SofleKeyboard - a split keyboard based on Lily58 and Crkbd](https://josef-adamcik.cz/electronics/let-me-introduce-you-sofle-keyboard-split-keyboard-based-on-lily58.html)
 
+The current (temporary) build guide and a build log is available here: [SofleKeyboard build log/guide](https://josef-adamcik.cz/electronics/soflekeyboard-build-log-and-build-guide.html)
 
-## mask-1.0.0
-Version 1 is a rather normal split keyboard like the sofle. It uses the staggering from sofle-v1 and has full rgb-lighting
-(but with proper reverse-mount LEDs (SK6812-E; [Adafruit 4960](https://github.com/marcoster/mask)) which makes this part far
-easier to solder.
-Switches are Cherry MX with hotswap sockets.
-The controller is populated through a standard Pro-Micro socket. In my case I used the KB2040.
+* Keyboard Maintainer: [Josef Adamcik](https://josef-adamcik.cz) [Twitter:@josefadamcik](https://twitter.com/josefadamcik)  
+* Hardware Supported: SofleKeyboard PCB, ProMicro  
+* Hardware Availability: [PCB & Case Data](https://github.com/josefadamcik/SofleKeyboard)
 
-### Compile
-Depending on your controller, but i.e. for the marcoster keymap:
-```
-qmk compile -kb mask -km marcoster -e CONVERT_TO=kb2040 # defaults to rev1
-or
-qmk compile -kb mask/rev1 -km marcoster -e CONVERT_TO=kb2040
-```
+Make example for this keyboard (after setting up your build environment):
 
-## mask-2.0.0
-Version 2 is the ultra-slim variant using Cherry MX ULP switches. The column-staggering is a bit more extreme than V1 and
-the thumb cluster is also different. The controller is also populated by a Pro-Micro pinout, but this time the board has to
-be soldered directly to the pcb to stay as slim as possible.
-The board is prepared for per-key rgb-lighting, but this was never tested (I never got my hands on the needed LEDs; and it
-might get really hard to solder, since the switches have to be placed over the LEDs.
+    make sofle:default
 
-### Compile
-```
-qmk compile -kb mask/rev2 -km rev2 -e CONVERT_TO=kb2040
-```
+Flash the default keymap: 
 
+    make sofle:default:avrdude
+
+Press reset button on he keyboard when asked.
+
+Disconnect the first half, connect the second one and repeat the process.
+
+See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
