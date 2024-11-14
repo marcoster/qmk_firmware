@@ -1,0 +1,1 @@
+#define PAL_USE_CALLBACKS TRUE
