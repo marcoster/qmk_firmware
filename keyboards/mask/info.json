@@ -5,7 +5,7 @@
         "extrakey": true,
         "mousekey": true,
         "nkro": true,
-        "encoder": true,
+        "encoder": false,
         "oled": true
     },
     "build": {
