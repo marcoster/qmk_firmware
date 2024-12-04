@@ -10,10 +10,12 @@ enum sofle_layers {
     /* _M_XYZ = Mac Os, _W_XYZ = Win/Linux */
     _QWERTY,
     _COLEMAK,
+    _GAME,
+    _GRAPHITE_MOD,
     _LOWER,
     _RAISE,
     _ADJUST,
-    _GAME,
+
 };
 
 enum custom_keycodes {
@@ -22,7 +24,12 @@ enum custom_keycodes {
     KC_GAME,
     KC_GHOME,
     KC_GEND,
+    KC_GRAPHITE_MOD,
 };
+
+#define LOWR_LR MO(_LOWER)
+#define UPPR_LR MO(_RAISE)
+#define ADJ_LR MO(_ADJUST)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
@@ -46,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,   KC_Q,   KC_W,     KC_E,    KC_R,    KC_T,                             KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,     KC_DEL,
   KC_LSFT,  KC_A,   KC_S,     KC_D,    KC_F,    KC_G,                             KC_H,   KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,     // no homerow mods
   KC_LCTL, KC_Z,   KC_X,     KC_C,    KC_V,    KC_B,     KC_MUTE,       XXXXXXX, KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
-                    KC_LCTL, KC_LALT, KC_LGUI, TL_LOWR, TL_UPPR,      KC_ENT,  KC_SPC, KC_RGUI, KC_RALT, KC_RCTL
+                    KC_LCTL, KC_LALT, KC_LGUI, LOWR_LR, UPPR_LR,      KC_ENT,  KC_SPC, KC_RGUI, KC_RALT, KC_RCTL
 ),
 /*
  * COLEMAK
@@ -69,8 +76,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,   KC_Q,   KC_W,     KC_F,    KC_P,          KC_B,                           KC_J,   KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_DEL,
   KC_LSFT,  KC_A,   KC_R,     KC_S,    KC_T,          KC_G,                           KC_M,   KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
   KC_LCTL,  KC_Z,   KC_X,     KC_C,    KC_D,          KC_V,     KC_MUTE,     XXXXXXX, KC_K,   KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                    KC_LCTL,  KC_LALT, KC_LGUI,       TL_LOWR, TL_UPPR,    KC_ENT,  KC_SPC, KC_RGUI, KC_CAPS, KC_RCTL
+                    KC_LCTL,  KC_LALT, KC_LGUI,       LOWR_LR, UPPR_LR,    KC_ENT,  KC_SPC, KC_RGUI, KC_CAPS, KC_RCTL
 ),
+
+[_GAME] = LAYOUT(
+  KC_ESC,   KC_1,   KC_2,     KC_3,    KC_4,    KC_5,                           KC_6,     KC_7,    KC_8,    KC_9,    KC_0,     KC_BSPC,
+  KC_TAB,   KC_Q,   KC_W,     KC_E,    KC_R,    KC_T,                           KC_Y,     KC_U,    KC_I,    KC_O,    KC_P,     KC_ENT,
+  KC_LSFT,  KC_A,   KC_S,     KC_D,    KC_F,    KC_G,                           KC_H,     KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,
+  KC_LCTL, KC_Z,   KC_X,     KC_C,    KC_V,    KC_B,   KC_MUTE,       XXXXXXX, KC_N,     KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
+                    KC_CIRC,  KC_M,    KC_LALT, KC_SPC, KC_ENT,        UPPR_LR, LOWR_LR, KC_RGUI, KC_RALT, KC_RCTL
+),
+
+
+[_GRAPHITE_MOD] = LAYOUT(
+  KC_ESC,   KC_1,   KC_2,     KC_3,    KC_4,          KC_5,                           KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
+  KC_TAB,   KC_B,   KC_L,     KC_D,    KC_W,          KC_Z,                           KC_J,   KC_F,    KC_O,    KC_U,    KC_SCLN, KC_DEL,
+  KC_LSFT,  KC_N,   KC_R,     KC_T,    KC_S,          KC_G,                           KC_Y,   KC_H,    KC_A,    KC_E,    KC_I,    KC_QUOT,
+  KC_LCTL,  KC_Q,   KC_X,     KC_M,    KC_C,          KC_V,     KC_MUTE,     XXXXXXX, KC_K,   KC_P,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+                    KC_LCTL,  KC_LALT, KC_LGUI,       LOWR_LR, UPPR_LR,    KC_ENT,  KC_SPC, KC_RGUI, KC_CAPS, KC_RCTL
+),
+
+
+
+
+
+
 
 
 /* LOWER
@@ -92,7 +122,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TILD,   KC_1,      KC_2,      KC_3,      KC_4,      KC_5,                              KC_6,      KC_7,      KC_8,      KC_9,      KC_0,      KC_MINS,
   LSFT_GRV,  KC_EXLM,   KC_AT,     KC_HASH,   KC_DLR,    KC_PERC,                           KC_CIRC,   KC_AMPR,   KC_ASTR,   KC_LPRN,   KC_RPRN,   KC_UNDS,
   _______,   KC_EQL,    KC_MINS,   KC_PLUS,   KC_LCBR,   KC_RCBR,   _______,       _______, KC_LBRC,   KC_RBRC,   KC_PIPE,   KC_COLN,   KC_BSLS,   _______,
-                        _______,   _______,   _______,   _______,   _______,     _______, _______,   _______,   _______,   _______
+                        _______,   _______,   _______,   _______,   ADJ_LR,     _______, _______,   _______,   _______,   _______
 ),
 
 /* RAISE
@@ -114,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_CAPS, XXXXXXX, KC_UP,   XXXXXXX, KC_VOLU, XXXXXXX,                          KC_PGUP, KC_PGDN, KC_DEL,  KC_INS,  XXXXXXX, KC_F12,
   _______, KC_LEFT, KC_DOWN, KC_RIGHT,KC_VOLD, XXXXXXX,                          KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_HOME, KC_END,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, XXXXXXX,   _______,      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                    _______, _______, _______, _______, _______,      _______, _______, _______, _______, _______
+                    _______, _______, _______, ADJ_LR, _______,      _______, _______, _______, _______, _______
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -132,36 +162,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
   [_ADJUST] = LAYOUT(
   QK_BOOT, XXXXXXX, XXXXXXX,   XXXXXXX,    XXXXXXX, XXXXXXX,                     KC_GHOME,  KC_GEND,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX, RGB_TOG, RGB_HUI,   RGB_VAI,    RGB_SAI, XXXXXXX,                     KC_QWERTY, KC_COLEMAK, KC_GAME, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX, RGB_TOG, RGB_HUI,   RGB_VAI,    RGB_SAI, XXXXXXX,                     KC_QWERTY, KC_COLEMAK, KC_GAME, KC_GRAPHITE_MOD, XXXXXXX, XXXXXXX,
   XXXXXXX, RGB_MOD, RGB_HUD,   RGB_VAD,    RGB_SAD, XXXXXXX,                     XXXXXXX,   XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,   XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                     _______,   _______,    _______, _______, _______,   _______, _______,   _______,    _______, _______
   ),
-
-/*
- * GAME
- * ,-----------------------------------------.                    ,-----------------------------------------.
- * | ESC  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  | BSPC |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | TAB  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | DEL  |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | LSFT |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
- * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * | LCTL |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  | RSFT |
- * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            |  ^   |  M   | LALT |SPACE | /ENTER  /       \RAISE \  |LOWER | RGUI | RALT | RCTL |
- *            |      |      |      |      |/       /         \      \ |      |      |      |      |
- *            `----------------------------------'           '------''---------------------------'
- */
-
-[_GAME] = LAYOUT(
-  KC_ESC,   KC_1,   KC_2,     KC_3,    KC_4,    KC_5,                           KC_6,     KC_7,    KC_8,    KC_9,    KC_0,     KC_BSPC,
-  KC_TAB,   KC_Q,   KC_W,     KC_E,    KC_R,    KC_T,                           KC_Y,     KC_U,    KC_I,    KC_O,    KC_P,     KC_ENT,
-  KC_LSFT,  KC_A,   KC_S,     KC_D,    KC_F,    KC_G,                           KC_H,     KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT,
-  KC_LCTL, KC_Z,   KC_X,     KC_C,    KC_V,    KC_B,   KC_MUTE,       XXXXXXX, KC_N,     KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
-                    KC_CIRC,  KC_M,    KC_LALT, KC_SPC, KC_ENT,        TL_UPPR,TL_LOWR, KC_RGUI, KC_RALT, KC_RCTL
-),
-
 
 };
 
@@ -200,6 +205,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_END);
             }
             return false;
+
+        case KC_GRAPHITE_MOD:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_GRAPHITE_MOD);
+            }
+        return false;
     }
     return true;
 }
