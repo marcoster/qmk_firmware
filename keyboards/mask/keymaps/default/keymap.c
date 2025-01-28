@@ -31,6 +31,7 @@ enum custom_keycodes {
 #define UPPR_LR MO(_RAISE)
 #define ADJ_LR MO(_ADJUST)
 
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
  * QWERTY
@@ -142,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_RAISE] = LAYOUT(
   _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                            KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   KC_CAPS, XXXXXXX, KC_UP,   XXXXXXX, KC_VOLU, XXXXXXX,                          KC_PGUP, KC_PGDN, KC_DEL,  KC_INS,  XXXXXXX, KC_F12,
-  _______, KC_LEFT, KC_DOWN, KC_RIGHT,KC_VOLD, XXXXXXX,                          KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_HOME, KC_END,
+  _______, KC_LEFT, KC_DOWN, KC_RIGHT,KC_VOLD, XXXXXXX,                          KC_H,    KC_J,    KC_K,    KC_L,    KC_HOME, KC_END,
   _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, XXXXXXX,   _______,      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                     _______, _______, _______, ADJ_LR, _______,      _______, _______, _______, _______, _______
 ),
